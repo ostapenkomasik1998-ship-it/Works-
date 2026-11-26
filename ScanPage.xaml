@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.Maui.Controls"
+             xmlns:vm="clr-namespace:QrScanner.ViewModels"
+             x:Class="QrScanner.Views.ScanPage"
+             x:DataType="vm:ScanViewModel"
+             Title="Сканер QR">
+    <Grid RowDefinitions="*,Auto">
+
+        <zxing:CameraBarcodeReaderView x:Name="Reader"
+                                       Grid.Row="0"
+                                       IsDetecting="{Binding IsDetecting}"
+                                       BarcodeDetected="OnBarcodeDetected" />
+
+        <!-- Рамка-видошукач -->
+        <Border Grid.Row="0"
+                WidthRequest="240" HeightRequest="240"
+                HorizontalOptions="Center" VerticalOptions="Center"
+                Stroke="White" StrokeThickness="3"
+                StrokeShape="RoundRectangle 16"
+                BackgroundColor="Transparent"
+                InputTransparent="True"
+                IsVisible="{Binding IsDetecting}" />
+
+        <VerticalStackLayout Grid.Row="1" Padding="20" Spacing="10"
+                             BackgroundColor="{AppThemeBinding Light=#F2F2F7, Dark=#1C1C1E}">
+
+            <Label Text="Наведіть камеру на QR-код"
+                   HorizontalTextAlignment="Center"
+                   IsVisible="{Binding IsDetecting}" />
+
+            <VerticalStackLayout Spacing="10" IsVisible="{Binding HasResult}">
+                <Label Text="Результат:" FontAttributes="Bold" />
+                <Label Text="{Binding ScannedValue}" FontSize="16" />
+                <Label Text="Це веб-посилання" TextColor="Green" IsVisible="{Binding IsLink}" />
+                <Button Text="Відкрити в браузері"
+                        Command="{Binding OpenLinkCommand}"
+                        IsVisible="{Binding IsLink}" />
+                <Button Text="Сканувати ще"
+                        Command="{Binding ScanAgainCommand}" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
