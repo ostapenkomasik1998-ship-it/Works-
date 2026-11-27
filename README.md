@@ -24,5 +24,7 @@
 dotnet workload install maui-android
 dotnet build QrScanner/QrScanner.csproj -f net8.0-android -t:Run
 ```
-Або Visual Studio 2022 → обрати Android-пристрій/емулятор → Run.
-APK також збирається в GitHub Actions (`.github/workflows/build-apk.yml`).
+
+Оновлення
+
+Я хотів зробити завдання на ноутбуки який взял в друга тому що мій на ремонті, але сьогодні чогось було дуже мало світла, і коли я почав робити завдання то світло відключили. Я зробив завдання в github, але скріншоти не зміг зробити тому що дуже мало часу залишилось, і забув добавити пояснення.
